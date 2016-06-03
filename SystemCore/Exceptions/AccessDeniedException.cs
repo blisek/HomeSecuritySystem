@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace SystemCore.Exceptions
 {
+    /// <summary>
+    /// Wyjątek rzucany, gdy użytkownik próbuje uzyskać dostęp do funkcjonalności spoza zbioru jego przywilejów.
+    /// </summary>
     public class AccessDeniedException : UnauthorizedAccessException
     {
         public AccessDeniedException() { }

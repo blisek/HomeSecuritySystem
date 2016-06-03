@@ -51,11 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\AbstractDAO.cs" />
     <Compile Include="DAO\PrivilegeDAO.cs" />
+    <Compile Include="DAO\SensorEventDAO.cs" />
     <Compile Include="DAO\SystemUserDAO.cs" />
     <Compile Include="SQLiteDBConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TO\PrivilegeTO.cs" />
+    <Compile Include="TO\SensorEventTO.cs" />
     <Compile Include="TO\SystemUserTO.cs" />
   </ItemGroup>
   <ItemGroup>

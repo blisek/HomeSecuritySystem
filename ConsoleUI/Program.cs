@@ -12,12 +12,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            foreach(var privilege in PrivilegeDAO.GetAll())
+            foreach(var privilege in PrivilegeDAO.GetInstance().GetAll())
             {
                 WritePrivilege(privilege);
             }
 
-            WritePrivilege(PrivilegeDAO.GetById(2));
+            WritePrivilege(PrivilegeDAO.GetInstance().GetById(2));
         }
 
         private static void WritePrivilege(PrivilegeTO privilege)
