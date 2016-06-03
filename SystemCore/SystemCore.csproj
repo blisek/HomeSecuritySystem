@@ -47,10 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Enums\SensorType.cs" />
     <Compile Include="Exceptions\AccessDeniedException.cs" />
     <Compile Include="Helpers\PrivilegeHelper.cs" />
+    <Compile Include="Mappers\SensorEventTO2SensorEvent.cs" />
     <Compile Include="Mappers\SystemUserTO2UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sensors\SensorEventMapper.cs" />
+    <Compile Include="Sensors\SensorEventMapperFactory.cs" />
+    <Compile Include="Sensors\SensorEventMappers\MoveSensorEventMapper.cs" />
+    <Compile Include="Sensors\SensorsRegister.cs" />
+    <Compile Include="Structs\SensorEvent.cs" />
     <Compile Include="Structs\User.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,7 @@ namespace SystemModel.DAO
         {
             if (_cachedPrivileges == null)
             {
-                using (var connection = SQLiteDBConnection.GetInstance().GetConnection())
+                using (var connection = GetConnection())
                 {
                     _cachedPrivileges = connection.Query<PrivilegeTO>(QUERY_SELECT_ALL).ToList();
                 }
@@ -54,8 +54,10 @@ namespace SystemModel.DAO
         /// </summary>
         /// <param name="id">Id > 0, identyfikujące PriviligeTO.</param>
         /// <returns>Odpowiedni PrivilegeTO, bądź null.</returns>
-        public PrivilegeTO GetById(int id)
+        public PrivilegeTO GetById(int? id)
         {
+            if (id == null)
+                return null;
             return GetAll().Where(p => p.PrivilegeId == id).SingleOrDefault();
         }
 

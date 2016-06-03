@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SystemModel.DAO
 {
@@ -27,6 +29,11 @@ namespace SystemModel.DAO
             {
                 return connection.Query<T>(QUERY_SELECT_ALL);
             }
+        }
+
+        protected virtual IDbConnection GetConnection()
+        {
+            return SQLiteDBConnection.GetInstance().GetConnection();
         }
     }
 }

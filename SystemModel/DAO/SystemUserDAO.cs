@@ -40,7 +40,7 @@ namespace SystemModel.DAO
         /// <returns>Instancja SystemUserTO z danymi użytkownika o danym id, bądź null jeśli użytkownika nie ma w systemie.</returns>
         public SystemUserTO GetById(int id)
         {
-            using(var connection = SQLiteDBConnection.GetInstance().GetConnection())
+            using(var connection = GetConnection())
             {
                 return connection.Query<SystemUserTO>(QUERY_SELECT_BY_ID, new { userId = id }).SingleOrDefault();
             }
@@ -53,7 +53,7 @@ namespace SystemModel.DAO
         /// <returns>Enumerator do obiektów SystemUserTO spełniających ww. wymaganie.</returns>
         public IEnumerable<SystemUserTO> GetByPrivilegeId(int privId)
         {
-            using(var connection = SQLiteDBConnection.GetInstance().GetConnection())
+            using(var connection = GetConnection())
             {
                 return connection.Query<SystemUserTO>(QUERY_SELECT_BY_PRIVILEGE_ID, new { privilegeId = privId });
             }

@@ -5,7 +5,7 @@
         /// <summary>
         /// Id użytkownika w systemie.
         /// </summary>
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Nazwa użytkownika w systemie

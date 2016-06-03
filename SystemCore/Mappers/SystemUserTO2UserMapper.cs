@@ -23,12 +23,12 @@ namespace SystemCore.Mappers
             if (userTO == null)
                 throw new ArgumentNullException("userTO");
 
-            var privilegeTO = PrivilegeDAO.GetInstance().GetById(userTO.PrivilegeId ?? -1);
+            var privilegeTO = PrivilegeDAO.GetInstance().GetById(userTO.PrivilegeId);
             int privilegeLevel = privilegeTO.PrivilegeLevel ?? int.MaxValue;
 
             return new User
             {
-                Id = userTO.UserId ?? -1,
+                Id = userTO.UserId,
                 Name = userTO.UserName,
                 Password = userTO.UserPassword,
                 PrivilegeLevel = privilegeLevel
