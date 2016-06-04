@@ -31,6 +31,18 @@ namespace SystemCore.SystemContext
                 AddSensor(sensor);
         }
 
-        
+        /// <summary>
+        /// Zwraca enumerator do wszystkich obecnie zarejestrowanych czujników.
+        /// </summary>
+        /// <returns></returns>
+        public abstract IEnumerable<SensorInfo> GetAllSensors();
+
+        /// <summary>
+        /// Zwraca konkretny sensor, bądź null jeśli nie jest zarejestrowany
+        /// w systemie czujnik o takim identyfikatorze.
+        /// </summary>
+        /// <param name="sensorId">Identyfikator czujnika.</param>
+        /// <returns></returns>
+        public abstract SensorInfo GetSensor(string sensorId);
     }
 }

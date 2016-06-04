@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Sensors\Drivers\SensorDriver.cs" />
+    <Compile Include="Sensors\Drivers\SensorState.cs" />
     <Compile Include="Sensors\SensorEvents\SensorEventMappers\DefaultSensorEventMapper.cs" />
     <Compile Include="Sensors\SensorEvents\SpecificSensorEvents\MoveSensorEvent.cs" />
     <Compile Include="Sensors\SensorInfo.cs" />
