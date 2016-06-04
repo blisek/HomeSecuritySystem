@@ -23,6 +23,7 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
                 SensorId = eventTO.EventSource,
                 EventDate = eventTO.EventDate,
                 EventDescription = eventTO.EventDescription,
+                Severity = (EventSeverity)eventTO.Severity,
                 SensorType = SensorType.UNKNOWN
             };
         }

@@ -22,6 +22,7 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
                 SensorId = eventTO.EventSource,
                 EventDescription = eventTO.EventDescription,
                 EventDate = eventTO.EventDate,
+                Severity = (EventSeverity)eventTO.Severity,
                 Distance = distance,
                 Angle = angle,
                 SensorType = SensorType.MOVE_SENSOR

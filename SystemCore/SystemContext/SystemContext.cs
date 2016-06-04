@@ -13,6 +13,8 @@ namespace SystemCore.SystemContext
 
         public static SensorsManager SensorsManager { get; private set; }
 
+        public static SensorsLogger SensorsLogger { get; private set; }
+
         public static void InitSystemContext(SystemContextTemplate systemContextTemplate)
         {
 

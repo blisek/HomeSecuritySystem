@@ -29,6 +29,11 @@ namespace SystemCore.Sensors.SensorEvents
         public DateTime EventDate { get; set; }
 
         /// <summary>
+        /// "Poważność" zdarzenia.
+        /// </summary>
+        public EventSeverity Severity { get; set; }
+
+        /// <summary>
         /// Typ sensora. Jeśli typ ten jest inny niż UNKNOWN, można użyć tej informacji do rzutowania tego typu w dół,
         /// w celu pozyskania dokładniejszych informacji zawartych wcześniej w EventPar1-4.
         /// </summary>

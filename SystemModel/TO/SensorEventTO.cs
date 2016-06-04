@@ -37,6 +37,11 @@ namespace SystemModel.TO
         public DateTime EventDate { get; set; }
 
         /// <summary>
+        /// "Poważność" zdarzenia.
+        /// </summary>
+        public int Severity { get; set; }
+
+        /// <summary>
         /// Dodatkowy parametr używany przez wyspecjalizowane parsery zdarzeń.
         /// </summary>
         public string EventPar1 { get; set; }
