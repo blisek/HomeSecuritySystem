@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SystemModel.TO
+﻿namespace SystemModel.TO
 {
     /// <summary>
     /// Transport Object przetrzymujący niezbędne informacje o użytkowniku.
@@ -30,5 +24,10 @@ namespace SystemModel.TO
         /// Poziom uprawnień użytkownika.
         /// </summary>
         public int? PrivilegeId { get; set; }
+
+        /// <summary>
+        /// Telefon kontaktowy.
+        /// </summary>
+        public string PhoneNumber { get; set; }
     }
 }

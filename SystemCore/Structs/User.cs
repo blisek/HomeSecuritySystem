@@ -21,5 +21,10 @@
         /// Poziom dostępu użytkownika. Nie mylić z PrivilegeId. Jest to wartość pola PrivilegeTO.PrivilegeLevel.
         /// </summary>
         public int PrivilegeLevel { get; set; }
+
+        /// <summary>
+        /// Telefon kontaktowy.
+        /// </summary>
+        public string PhoneNumber { get; set; }
     }
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystemCore.Enums
+namespace SystemCore.SystemContext
 {
-    public enum SensorType
+#warning [WZORZEC] Metoda szablonowa.
+    public interface SystemContextTemplate
     {
-        UNKNOWN, MOVE_SENSOR, // itd...
     }
 }

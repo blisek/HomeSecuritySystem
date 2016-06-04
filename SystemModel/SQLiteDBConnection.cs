@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SystemModel
 {
+#warning [WZORZEC] Singleton
     public class SQLiteDBConnection
     {
         //private static IDbConnection _connection;

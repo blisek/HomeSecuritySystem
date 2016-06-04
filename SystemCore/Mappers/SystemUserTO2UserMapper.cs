@@ -12,8 +12,8 @@ namespace SystemCore.Mappers
     public static class SystemUserTO2UserMapper
     {
         /// <summary>
-        /// Mapuje pojedynczy TO SystemUserTO na strukturę User. Jeśli userTO.UserId jest null, to tworzony obiekt User otrzymuje Id == -1. Jeśli userTO.PrivilegeId jest null,
-        /// bądź nie istnieje w bazie, przypisywany jest mu poziom dostępu PrivilegeLevel == int.MaxValue, co w praktyce oznacza że nie ma nigdzie dostępu, bądź jest ograniczony
+        /// Mapuje pojedynczy TO SystemUserTO na strukturę User. Jeśli userTO.PrivilegeId jest null, bądź nie istnieje w bazie, 
+        /// przypisywany jest mu poziom dostępu PrivilegeLevel == int.MaxValue, co w praktyce oznacza że nie ma nigdzie dostępu, bądź jest ograniczony
         /// tylko do bazowych funkcjonalności systemu.
         /// </summary>
         /// <param name="userTO">Obiekt SystemUserTO utworzony np. w SystemUserDAO.</param>
@@ -31,7 +31,8 @@ namespace SystemCore.Mappers
                 Id = userTO.UserId,
                 Name = userTO.UserName,
                 Password = userTO.UserPassword,
-                PrivilegeLevel = privilegeLevel
+                PrivilegeLevel = privilegeLevel,
+                PhoneNumber = userTO.PhoneNumber
             };
         }
 

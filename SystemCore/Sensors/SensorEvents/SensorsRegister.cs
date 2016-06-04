@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SystemCore.Enums;
+using SystemCore.Sensors;
 
-namespace SystemCore.Sensors
+namespace SystemCore.Sensors.SensorEvents
 {
     public static class SensorsRegister
     {

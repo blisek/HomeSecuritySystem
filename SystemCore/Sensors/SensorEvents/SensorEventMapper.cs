@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SystemCore.Structs;
 using SystemModel.TO;
 
-namespace SystemCore.Sensors
+namespace SystemCore.Sensors.SensorEvents
 {
     public interface SensorEventMapper
     {

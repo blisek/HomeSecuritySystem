@@ -22,6 +22,11 @@ namespace SystemModel.TO
         public string EventSource { get; set; }
 
         /// <summary>
+        /// Rodzaj sensora. Może być null, wtedy będzie traktowany jako UNKNOWN.
+        /// </summary>
+        public string SourceType { get; set; }
+
+        /// <summary>
         /// Opis zdarzenia/parametry w czasie zajścia zdarzenia itp.
         /// </summary>
         public string EventDescription { get; set; }
