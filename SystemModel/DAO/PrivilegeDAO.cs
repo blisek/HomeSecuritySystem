@@ -11,6 +11,8 @@ namespace SystemModel.DAO
 {
     public class PrivilegeDAO : AbstractDAO<PrivilegeTO>
     {
+        private const string QUERY_INSERT_PRIVILEGE = "INSERT INTO privileges(PrivilegeName, PrivilegeDesc, PrivilegeLevel) VALUES (@PrivilegeName, @PrivilegeDesc, @PrivilegeLevel); SELECT last_insert_rowid()";
+
         private static volatile PrivilegeDAO _instance;
         private static object _mutex = new object();
 
@@ -90,6 +92,19 @@ namespace SystemModel.DAO
         public IEnumerable<PrivilegeTO> GetByPredicate(Func<PrivilegeTO, bool> predicate)
         {
             return GetAll().Where(predicate);
+        }
+
+        public PrivilegeTO Insert(PrivilegeTO privilege)
+        {
+            if (privilege == null)
+                throw new ArgumentNullException("privilege");
+
+            using(var connection = GetConnection())
+            {
+                privilege.PrivilegeId = connection.Query<int>(QUERY_INSERT_PRIVILEGE, privilege).FirstOrDefault();
+            }
+
+            return privilege;
         }
     }
 }

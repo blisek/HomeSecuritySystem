@@ -12,6 +12,9 @@ namespace SystemModel.DAO
     {
         private const string QUERY_SELECT_BY_ID = "select * from users where UserId = @userId";
         private const string QUERY_SELECT_BY_PRIVILEGE_ID = "select * from users where PrivilegeId = @privilegeId";
+        private const string QUERY_UPDATE = "UPDATE users SET UserName=@UserName, UserPassword=@UserPassword, PrivilegeId=@PrivilegeId, PhoneNumber=@PhoneNumber WHERE UserId=@UserId";
+        private const string QUERY_INSERT = "INSERT INTO users(UserName, UserPassword, PrivilegeId, PhoneNumber) VALUES (@UserName, @UserPassword, @PrivilegeId, @PhoneNumber); SELECT last_insert_rowid()";
+        private const string QUERY_DELETE = "REMOVE FROM users WHERE UserId=@UserId";
 
         private static volatile SystemUserDAO _instance;
         private static object _mutex = new object();
@@ -58,5 +61,44 @@ namespace SystemModel.DAO
                 return connection.Query<SystemUserTO>(QUERY_SELECT_BY_PRIVILEGE_ID, new { privilegeId = privId });
             }
         }
+
+        public SystemUserTO Update(SystemUserTO userTO)
+        {
+            if (userTO == null)
+                throw new ArgumentNullException("userTO");
+
+            using(var connection = GetConnection())
+            {
+                connection.Execute(QUERY_UPDATE, userTO);
+            }
+
+            return userTO;
+        }
+
+        public SystemUserTO Insert(SystemUserTO userTO)
+        {
+            if (userTO == null)
+                throw new ArgumentNullException("userTO");
+
+            using(var connection = GetConnection())
+            {
+                userTO.UserId = connection.Query<int?>(QUERY_INSERT, userTO).FirstOrDefault();
+            }
+
+            return userTO;
+        }
+
+        public void Delete(SystemUserTO userTO)
+        {
+            if (userTO == null)
+                throw new ArgumentNullException("userTO");
+
+            using(var connection = GetConnection())
+            {
+                connection.Execute(QUERY_DELETE, userTO);
+            }
+        }
+
+
     }
 }

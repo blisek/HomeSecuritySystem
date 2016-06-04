@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Mappers\Event2EventTO.cs" />
+    <Compile Include="Mappers\User2SystemUserTO.cs" />
     <Compile Include="Sensors\Drivers\SensorDriver.cs" />
     <Compile Include="Sensors\Drivers\SensorState.cs" />
     <Compile Include="Sensors\SensorEvents\EventSeverity.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Services\SMS\SMSMessage.cs" />
     <Compile Include="Services\SMS\SMSRecipient.cs" />
     <Compile Include="Services\SMS\SMSService.cs" />
+    <Compile Include="SystemActions\Impl\UserManagementImpl.cs" />
+    <Compile Include="SystemActions\UserManagement.cs" />
     <Compile Include="SystemContext\Default\DefaultDBSensorsLogger.cs" />
     <Compile Include="SystemContext\Default\DefaultSensorsManager.cs" />
     <Compile Include="SystemContext\Default\DefaultSystemContextConstructor.cs" />

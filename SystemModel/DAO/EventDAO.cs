@@ -16,6 +16,9 @@ namespace SystemModel.DAO
         private const string QUERY_INSERT_SENSOR_EVENT =
             "INSERT INTO events(EventSource, SourceType, EventDescription, EventDate, Severity, EventPar1, EventPar2, EventPar3, EventPar4) VALUES " +
             "(@EventSource, @SourceType, @EventDescription, @EventDate, @Severity, @EventPar1, @EventPar2, @EventPar3, @EventPar4); SELECT last_insert_rowid()";
+        private const string QUERY_UPDATE_EVENT =
+            "UPDATE events SET EventSource=@EventSource, SourceType=@SourceType, EventDescription=@EventDescription, EventDate=@EventDate, " +
+            "Severity=@Severity, EventPar1=@EventPar1, EventPar2=@EventPar2, EventPar3=@EventPar3, EventPar4=@EventPar4 WHERE EventId=@EventId";
         private const string QUERY_SELECT_BY_ID = "select * from events where EventId = @eventId";
 
         private static volatile EventDAO _instance;
@@ -48,7 +51,7 @@ namespace SystemModel.DAO
 
             using(var connection = GetConnection())
             {
-                sensor.EventId = connection.Query<int>(QUERY_INSERT_SENSOR_EVENT, sensor).First();
+                sensor.EventId = connection.Query<int?>(QUERY_INSERT_SENSOR_EVENT, sensor).First();
             }
 
             return sensor;
@@ -65,6 +68,18 @@ namespace SystemModel.DAO
             {
                 return connection.Query<EventTO>(QUERY_SELECT_BY_ID, new { eventId = id }).FirstOrDefault();
             }
+        }
+
+        public EventTO Update(EventTO ev) {
+            if (ev == null)
+                throw new ArgumentNullException("ev");
+
+            using(var connection = GetConnection())
+            {
+                connection.Execute(QUERY_UPDATE_EVENT, ev);
+            }
+
+            return ev;
         }
     }
 }

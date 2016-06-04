@@ -18,7 +18,7 @@ namespace SystemCore.Mappers
         /// </summary>
         /// <param name="userTO">Obiekt SystemUserTO utworzony np. w SystemUserDAO.</param>
         /// <returns></returns>
-        public static User map(SystemUserTO userTO)
+        public static User Map(SystemUserTO userTO)
         {
             if (userTO == null)
                 throw new ArgumentNullException("userTO");
@@ -41,10 +41,10 @@ namespace SystemCore.Mappers
         /// </summary>
         /// <param name="userTOs">Enumerator obiektów SystemUserTO.</param>
         /// <returns>Enumerator zmapowanych obiektów User.</returns>
-        public static IEnumerable<User> map(IEnumerable<SystemUserTO> userTOs)
+        public static IEnumerable<User> Map(IEnumerable<SystemUserTO> userTOs)
         {
             foreach (var uTO in userTOs)
-                yield return map(uTO);
+                yield return Map(uTO);
         }
     }
 }

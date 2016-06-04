@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemCore.Services.SMS;
+using SystemCore.SystemActions;
 
 namespace SystemCore.SystemContext
 {
@@ -38,6 +39,12 @@ namespace SystemCore.SystemContext
         /// </summary>
         /// <returns></returns>
         SMSService GetSMSService();
+
+        /// <summary>
+        /// Konstruuje i zwraca menadżera użytkowników systemu.
+        /// </summary>
+        /// <returns></returns>
+        UserManagement GetUserManagement();
 
         /// <summary>
         /// Metoda wywoływana jako ostatnia podczas konstruowania kontekstu.

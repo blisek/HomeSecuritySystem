@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.Services.SMS;
+using SystemCore.Services.SMS.DefaultImpl;
+using SystemCore.SystemActions;
+using SystemCore.SystemActions.Impl;
 
 namespace SystemCore.SystemContext.Default
 {
@@ -25,5 +29,15 @@ namespace SystemCore.SystemContext.Default
         }
 
         public abstract SensorsProvider GetSensorsProvider();
+
+        public SMSService GetSMSService()
+        {
+            return new SMSServiceImpl();
+        }
+
+        public UserManagement GetUserManagement()
+        {
+            return new UserManagementImpl();
+        }
     }
 }
