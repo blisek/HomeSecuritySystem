@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.Services.SMS;
 
 namespace SystemCore.SystemContext
 {
@@ -14,6 +15,8 @@ namespace SystemCore.SystemContext
         public static SensorsManager SensorsManager { get; private set; }
 
         public static SensorsLogger SensorsLogger { get; private set; }
+
+        public static SMSService SMSService { get; private set; }
 
         public static void InitSystemContext(SystemContextConstructor systemContextTemplate)
         {
@@ -28,6 +31,8 @@ namespace SystemCore.SystemContext
             SensorsProvider = systemContextTemplate.GetSensorsProvider();
 
             SensorsManager = systemContextTemplate.GetSensorsManager();
+
+            SMSService = systemContextTemplate.GetSMSService();
 
             // czynności po inicjalizacji komponentów
             systemContextTemplate.AfterInit();

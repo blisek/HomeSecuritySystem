@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.Sensors;
+using SystemCore.Sensors.SensorEvents;
+using SystemModel.TO;
 
 namespace SystemCore.Services.SMS.DefaultImpl
 {
     public class SMSServiceImpl : SMSService
     {
+        private const string MSG_MESSAGE_SENT = "Message \"{0}\" was sent to {1}";
+        private const string SERVICE_NAME = "SMSService";
+
         /// <summary>
         /// Tworzy nową wiadomość do wysłania.
         /// </summary>
@@ -19,12 +25,27 @@ namespace SystemCore.Services.SMS.DefaultImpl
 
         public bool SendMessage(SMSMessage message)
         {
-            // Wysylanie wiadomosci
-
             if (message == null)
                 throw new ArgumentNullException("message");
 
+            // Wysylanie wiadomosci...
+
+            LogMessage(message);
             return true;
+        }
+
+        private void LogMessage(SMSMessage msg)
+        {
+            string phoneNumbers = string.Join<string>(", ", msg.Recipients.Select(r => r.PhoneNumber));
+            var eventMsg = new Event
+            {
+                EventDescription = string.Format(MSG_MESSAGE_SENT, msg.Message, phoneNumbers),
+                EventType = EventType.SENT_MESSGE,
+                Severity = EventSeverity.INFO,
+                SensorId = "SMSService"
+            };
+
+            SystemContext.SystemContext.SensorsLogger.Log(eventMsg);
         }
     }
 }

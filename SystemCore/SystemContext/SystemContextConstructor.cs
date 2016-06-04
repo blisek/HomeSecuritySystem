@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.Services.SMS;
 
 namespace SystemCore.SystemContext
 {
@@ -31,6 +32,12 @@ namespace SystemCore.SystemContext
         /// </summary>
         /// <returns></returns>
         SensorsProvider GetSensorsProvider();
+
+        /// <summary>
+        /// Konstruuje i zwraca obiekt proxy do wysylania wiadomosci.
+        /// </summary>
+        /// <returns></returns>
+        SMSService GetSMSService();
 
         /// <summary>
         /// Metoda wywoływana jako ostatnia podczas konstruowania kontekstu.
