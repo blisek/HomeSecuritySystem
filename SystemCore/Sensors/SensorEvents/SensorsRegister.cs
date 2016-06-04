@@ -9,10 +9,10 @@ namespace SystemCore.Sensors.SensorEvents
 {
     public static class SensorsRegister
     {
-        public static SensorType GetSensorType(string sensorId)
+        public static EventType GetSensorType(string sensorId)
         {
 #warning Skończyć
-            return SensorType.UNKNOWN;
+            return EventType.UNKNOWN;
         }
     }
 }

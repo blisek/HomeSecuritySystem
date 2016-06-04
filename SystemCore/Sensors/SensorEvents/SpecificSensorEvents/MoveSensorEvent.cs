@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemCore.Sensors.SensorEvents.SpecificSensorEvents
 {
-    public class MoveSensorEvent : SensorEvent
+    public class MoveSensorEvent : Event
     {
         /// <summary>
         /// Odległoś od czujnika obiektu.

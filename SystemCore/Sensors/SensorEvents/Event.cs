@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemCore.Sensors.SensorEvents
 {
-    public class SensorEvent
+    public class Event
     {
         /// <summary>
         /// Unikalne id zdarzenia. Może być null, bądź mniejsze od zera jeśli zdarzenie ma być wstawione do db.
@@ -37,7 +37,7 @@ namespace SystemCore.Sensors.SensorEvents
         /// Typ sensora. Jeśli typ ten jest inny niż UNKNOWN, można użyć tej informacji do rzutowania tego typu w dół,
         /// w celu pozyskania dokładniejszych informacji zawartych wcześniej w EventPar1-4.
         /// </summary>
-        public SensorType SensorType { get; set; }
+        public EventType EventType { get; set; }
 
     }
 }

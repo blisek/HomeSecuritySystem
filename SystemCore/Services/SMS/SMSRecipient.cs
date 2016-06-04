@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystemCore.Mappers
+namespace SystemCore.Services.SMS
 {
     /// <summary>
-    /// Klasa zapewniająca metody konwertujące SensorEventTO do SensorEvent
+    /// Pojedynczy odbiorca wiadomości.
     /// </summary>
-    public static class SensorEventTO2SensorEvent
+    public struct SMSRecipient
     {
-        
+        public string PhoneNumber { get; set; }
     }
 }

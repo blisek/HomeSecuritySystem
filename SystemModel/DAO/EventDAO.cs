@@ -11,24 +11,24 @@ namespace SystemModel.DAO
     /// <summary>
     /// Dostarcza metody do wymiany informacji o zdarzeniach w systemie z bazą danych.
     /// </summary>
-    public sealed class SensorEventDAO : AbstractDAO<SensorEventTO>
+    public sealed class EventDAO : AbstractDAO<EventTO>
     {
         private const string QUERY_INSERT_SENSOR_EVENT =
-            "INSERT INTO sensor_events(EventSource, SourceType, EventDescription, EventDate, Severity, EventPar1, EventPar2, EventPar3, EventPar4) VALUES " +
+            "INSERT INTO events(EventSource, SourceType, EventDescription, EventDate, Severity, EventPar1, EventPar2, EventPar3, EventPar4) VALUES " +
             "(@EventSource, @SourceType, @EventDescription, @EventDate, @Severity, @EventPar1, @EventPar2, @EventPar3, @EventPar4); SELECT last_insert_rowid()";
-        private const string QUERY_SELECT_BY_ID = "select * from sensor_events where EventId = @eventId";
+        private const string QUERY_SELECT_BY_ID = "select * from events where EventId = @eventId";
 
-        private static volatile SensorEventDAO _instance;
+        private static volatile EventDAO _instance;
         private static object _mutex = new object();
 
-        public static SensorEventDAO GetInstance()
+        public static EventDAO GetInstance()
         {
             if(_instance == null)
             {
                 lock(_mutex)
                 {
                     if (_instance == null)
-                        _instance = new SensorEventDAO();
+                        _instance = new EventDAO();
                 }
             }
 
@@ -36,9 +36,9 @@ namespace SystemModel.DAO
         }
 
 
-        private SensorEventDAO() : base("sensor_events") { }
+        private EventDAO() : base("events") { }
 
-        public SensorEventTO Insert(SensorEventTO sensor)
+        public EventTO Insert(EventTO sensor)
         {
             if (sensor == null)
                 throw new ArgumentNullException("sensor");
@@ -59,11 +59,11 @@ namespace SystemModel.DAO
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public SensorEventTO GetById(int id)
+        public EventTO GetById(int id)
         {
             using(var connection = GetConnection())
             {
-                return connection.Query<SensorEventTO>(QUERY_SELECT_BY_ID, new { eventId = id }).FirstOrDefault();
+                return connection.Query<EventTO>(QUERY_SELECT_BY_ID, new { eventId = id }).FirstOrDefault();
             }
         }
     }

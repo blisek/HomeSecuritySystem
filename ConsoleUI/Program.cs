@@ -20,21 +20,21 @@ namespace ConsoleUI
 
         private static void test2()
         {
-            SensorEvent se = new MoveSensorEvent
+            Event se = new MoveSensorEvent
             {
                 SensorId = "move_detector_#1",
-                SensorType = SensorType.MOVE_SENSOR,
+                EventType = EventType.MOVE_SENSOR,
                 Severity = EventSeverity.DEBUG,
                 Angle = 69.41f,
                 Distance = 11.5f
             };
 
-            var to = SensorEventMapperFactory.GetMapper(SensorType.MOVE_SENSOR).Map(se);
-            to = SensorEventDAO.GetInstance().Insert(to);
+            var to = EventMapperFactory.GetMapper(EventType.MOVE_SENSOR).Map(se);
+            to = EventDAO.GetInstance().Insert(to);
             int newId = to.EventId ?? 0;
 
-            var readBackSensorEvent = SensorEventDAO.GetInstance().GetById(newId);
-            SensorEvent newSE = SensorEventMapperFactory.GetMapper(readBackSensorEvent.SourceType).Map(readBackSensorEvent);
+            var readBackSensorEvent = EventDAO.GetInstance().GetById(newId);
+            Event newSE = EventMapperFactory.GetMapper(readBackSensorEvent.SourceType).Map(readBackSensorEvent);
 
             
             return;
@@ -70,7 +70,7 @@ namespace ConsoleUI
             Console.WriteLine("MessageTemplate: {0}", messageTemplate.MessageTemplate ?? string.Empty);
         }
 
-        private static void WriteSensorEventTO(SensorEventTO seTO)
+        private static void WriteSensorEventTO(EventTO seTO)
         {
             Console.WriteLine("Id: {0}", seTO.EventId);
             Console.WriteLine("Sensor id: {0}", seTO.EventSource);

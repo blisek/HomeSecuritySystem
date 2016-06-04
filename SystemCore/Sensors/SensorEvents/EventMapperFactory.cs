@@ -8,12 +8,12 @@ using SystemCore.Sensors.SensorEvents.SensorEventMappers;
 namespace SystemCore.Sensors.SensorEvents
 {
 #warning [WZORZEC] Metoda wytwórcza
-    public static class SensorEventMapperFactory
+    public static class EventMapperFactory
     {
-        private static readonly Dictionary<SensorType, SensorEventMapper> _mappers = new Dictionary<SensorType, SensorEventMapper>()
+        private static readonly Dictionary<EventType, EventMapper> _mappers = new Dictionary<EventType, EventMapper>()
         {
-            { SensorType.UNKNOWN, new DefaultSensorEventMapper() },
-            { SensorType.MOVE_SENSOR, new MoveSensorEventMapper() }
+            { EventType.UNKNOWN, new DefaultSensorEventMapper() },
+            { EventType.MOVE_SENSOR, new MoveSensorEventMapper() }
         };
 
         /// <summary>
@@ -22,11 +22,11 @@ namespace SystemCore.Sensors.SensorEvents
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static SensorEventMapper GetMapper(SensorType type)
+        public static EventMapper GetMapper(EventType type)
         {
-            SensorEventMapper sem = null;
+            EventMapper sem = null;
             _mappers.TryGetValue(type, out sem);
-            return sem ?? _mappers[SensorType.UNKNOWN];
+            return sem ?? _mappers[EventType.UNKNOWN];
         }
 
         /// <summary>
@@ -34,14 +34,10 @@ namespace SystemCore.Sensors.SensorEvents
         /// </summary>
         /// <param name="sensorType"></param>
         /// <returns>Odpowiedni mapper, bądź domyślny mapper jeśli nie znaleziono wyspecjalizowanej wersji.</returns>
-        public static SensorEventMapper GetMapper(string sensorType)
+        public static EventMapper GetMapper(string sensorType)
         {
-            SensorType deductedType = SensorType.UNKNOWN;
-            try
-            {
-                deductedType = (SensorType)Enum.Parse(typeof(SensorType), sensorType, ignoreCase: true);
-            }
-            catch (ArgumentException) { }
+            EventType deductedType = EventType.UNKNOWN;
+            Enum.TryParse(sensorType, out deductedType);
 
             return GetMapper(deductedType);
         }
@@ -53,9 +49,9 @@ namespace SystemCore.Sensors.SensorEvents
         /// <param name="type"></param>
         /// <param name="mapper"></param>
         /// <returns></returns>
-        public static SensorEventMapper AddMapper(SensorType type, SensorEventMapper mapper)
+        public static EventMapper AddMapper(EventType type, EventMapper mapper)
         {
-            SensorEventMapper sem = null;
+            EventMapper sem = null;
             _mappers.TryGetValue(type, out sem);
             _mappers[type] = mapper;
             return sem;

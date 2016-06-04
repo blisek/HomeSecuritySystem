@@ -7,6 +7,6 @@ namespace SystemCore.SystemContext
     /// </summary>
     public interface SensorsLogger
     {
-        void Log(SensorEvent sensorEvent);
+        void Log(Event sensorEvent);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.Sensors.SensorEvents;
 
 namespace SystemCore.Sensors.Drivers
 {
@@ -14,13 +15,13 @@ namespace SystemCore.Sensors.Drivers
         /// <summary>
         /// Metoda, która jest wywoływana, gdy zajdzie jakieś zdarzenie w systemie.
         /// </summary>
-        Action<object> EventCallback { get; }
+        Action<Event> EventCallback { get; set; }
 
         /// <summary>
         /// Metoda wywoływana gdy zmieni się stan czujnika (chodzi o stan wewnętrzny czujnika,
         /// nie zdarzenia jak np. wykrycie ruchu)
         /// </summary>
-        Action<SensorState, object> StateChangedCallback { get; }
+        Action<SensorState> StateChangedCallback { get; set; }
 
         /// <summary>
         /// Podaje aktualny stan czujnika.

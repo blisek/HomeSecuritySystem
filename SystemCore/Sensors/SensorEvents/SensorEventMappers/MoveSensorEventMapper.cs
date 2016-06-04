@@ -8,29 +8,29 @@ using SystemCore.Sensors.SensorEvents.SpecificSensorEvents;
 
 namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
 {
-    public class MoveSensorEventMapper : SensorEventMapper
+    public class MoveSensorEventMapper : EventMapper
     {
-        public SensorEventTO Map(SensorEvent sensorEvent)
+        public EventTO Map(Event sensorEvent)
         {
             var castedSensorEvent = sensorEvent as MoveSensorEvent;
 
             if (castedSensorEvent == null)
                 throw new ArgumentException("Invalid type of sensorEvent. Expected MoveSensorEvent, get - " + sensorEvent.GetType().Name);
 
-            return new SensorEventTO
+            return new EventTO
             {
                 EventId = castedSensorEvent.Id,
                 EventSource = castedSensorEvent.SensorId,
                 EventDescription = castedSensorEvent.EventDescription,
                 EventDate = castedSensorEvent.EventDate,
                 Severity = (int)castedSensorEvent.Severity,
-                SourceType = castedSensorEvent.SensorType.ToString(),
+                SourceType = castedSensorEvent.EventType.ToString(),
                 EventPar1 = castedSensorEvent.Distance.ToString(),
                 EventPar2 = castedSensorEvent.Angle.ToString()
             };
         }
 
-        public IEnumerable<SensorEventTO> Map(IEnumerable<SensorEvent> sensorEvents)
+        public IEnumerable<EventTO> Map(IEnumerable<Event> sensorEvents)
         {
             if (sensorEvents == null)
                 throw new ArgumentNullException("sensorEvents");
@@ -39,7 +39,7 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
                 yield return Map(sensorEvent);
         }
 
-        public SensorEvent Map(SensorEventTO eventTO)
+        public Event Map(EventTO eventTO)
         {
             float distance = .0f;
             float.TryParse(eventTO.EventPar1, out distance);
@@ -55,11 +55,11 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
                 Severity = (EventSeverity)eventTO.Severity,
                 Distance = distance,
                 Angle = angle,
-                SensorType = SensorType.MOVE_SENSOR
+                EventType = EventType.MOVE_SENSOR
             };
         }
 
-        public IEnumerable<SensorEvent> Map(IEnumerable<SensorEventTO> eventTOs)
+        public IEnumerable<Event> Map(IEnumerable<EventTO> eventTOs)
         {
             if (eventTOs == null)
                 throw new ArgumentNullException("eventTOs");

@@ -15,9 +15,22 @@ namespace SystemCore.SystemContext
 
         public static SensorsLogger SensorsLogger { get; private set; }
 
-        public static void InitSystemContext(SystemContextTemplate systemContextTemplate)
+        public static void InitSystemContext(SystemContextConstructor systemContextTemplate)
         {
+            if (systemContextTemplate == null)
+                throw new ArgumentNullException("systemContextTemplate");
 
+            // czynności przed inicjalizacją komponentów
+            systemContextTemplate.BeforeInit();
+
+            SensorsLogger = systemContextTemplate.GetSensorsLogger();
+
+            SensorsProvider = systemContextTemplate.GetSensorsProvider();
+
+            SensorsManager = systemContextTemplate.GetSensorsManager();
+
+            // czynności po inicjalizacji komponentów
+            systemContextTemplate.AfterInit();
         }
     }
 }

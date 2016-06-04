@@ -7,22 +7,22 @@ using SystemModel.TO;
 
 namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
 {
-    public class DefaultSensorEventMapper : SensorEventMapper
+    public class DefaultSensorEventMapper : EventMapper
     {
-        public SensorEventTO Map(SensorEvent sensorEvent)
+        public EventTO Map(Event sensorEvent)
         {
-            return new SensorEventTO
+            return new EventTO
             {
                 EventId = sensorEvent.Id,
                 EventSource = sensorEvent.SensorId,
                 EventDescription = sensorEvent.EventDescription,
                 EventDate = sensorEvent.EventDate,
                 Severity = (int)sensorEvent.Severity,
-                SourceType = sensorEvent.SensorType.ToString()
+                SourceType = sensorEvent.EventType.ToString()
             };
         }
 
-        public IEnumerable<SensorEventTO> Map(IEnumerable<SensorEvent> sensorEvents)
+        public IEnumerable<EventTO> Map(IEnumerable<Event> sensorEvents)
         {
             if (sensorEvents == null)
                 throw new ArgumentNullException("sensorEvents");
@@ -31,22 +31,22 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
                 yield return Map(sensorEvent);
         }
 
-        public IEnumerable<SensorEvent> Map(IEnumerable<SensorEventTO> eventTOs)
+        public IEnumerable<Event> Map(IEnumerable<EventTO> eventTOs)
         {
             foreach (var to in eventTOs)
                 yield return Map(to);
         }
 
-        public SensorEvent Map(SensorEventTO eventTO)
+        public Event Map(EventTO eventTO)
         {
-            return new SensorEvent
+            return new Event
             {
                 Id = eventTO.EventId,
                 SensorId = eventTO.EventSource,
                 EventDate = eventTO.EventDate,
                 EventDescription = eventTO.EventDescription,
                 Severity = (EventSeverity)eventTO.Severity,
-                SensorType = SensorType.UNKNOWN
+                EventType = EventType.UNKNOWN
             };
         }
     }

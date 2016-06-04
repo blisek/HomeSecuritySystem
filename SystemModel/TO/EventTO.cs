@@ -9,7 +9,7 @@ namespace SystemModel.TO
     /// <summary>
     /// Obiekt opisujący pojedyncze zdarzenie, które zostało zgłoszone do systemu przez czujniki.
     /// </summary>
-    public class SensorEventTO
+    public class EventTO
     {
         /// <summary>
         /// Unikalne id zdarzenia.

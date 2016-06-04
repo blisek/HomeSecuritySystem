@@ -8,9 +8,41 @@ using SystemCore.Sensors;
 namespace SystemCore.SystemContext
 {
     /// <summary>
+    /// Moduł zarządzający zarejestrowanymi w systemie czujnikami.
+    /// </summary>
+    public interface SensorsManager
+    {
+        /// <summary>
+        /// Obejmuje zarządzaniem pojedynczy czujnik.
+        /// </summary>
+        /// <param name="sensor"></param>
+        void AddSensor(SensorInfo sensor);
+
+        /// <summary>
+        /// Obejmuje zarządzaniem kolekcji czujników.
+        /// </summary>
+        /// <param name="sensors"></param>
+        void AddSensors(IEnumerable<SensorInfo> sensors);
+
+        /// <summary>
+        /// Zwraca kolekcję wszystkich zarejestrowanych czujników.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<SensorInfo> GetAllSensors();
+
+        /// <summary>
+        /// Zwraca pojedynczy czujnik o danym id.
+        /// </summary>
+        /// <param name="sensorId"></param>
+        /// <returns></returns>
+        SensorInfo GetSensor(string sensorId);
+    }
+
+    /// <summary>
     /// Moduł zarządzający zarejestrowanymi czujnikami.
     /// </summary>
-    public abstract class SensorsManager
+    [Obsolete]
+    public abstract class SensorsManagerBase
     {
         /// <summary>
         /// Dodaje do zarządcy nowy czujnik.

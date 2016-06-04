@@ -47,29 +47,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Mappers\Event2EventTO.cs" />
     <Compile Include="Sensors\Drivers\SensorDriver.cs" />
     <Compile Include="Sensors\Drivers\SensorState.cs" />
     <Compile Include="Sensors\SensorEvents\EventSeverity.cs" />
     <Compile Include="Sensors\SensorEvents\SensorEventMappers\DefaultSensorEventMapper.cs" />
     <Compile Include="Sensors\SensorEvents\SpecificSensorEvents\MoveSensorEvent.cs" />
     <Compile Include="Sensors\SensorInfo.cs" />
-    <Compile Include="Sensors\SensorType.cs" />
+    <Compile Include="Sensors\EventType.cs" />
     <Compile Include="Exceptions\AccessDeniedException.cs" />
     <Compile Include="Helpers\PrivilegeHelper.cs" />
-    <Compile Include="Mappers\SensorEventTO2SensorEvent.cs" />
+    <Compile Include="Mappers\EventTO2Event.cs" />
     <Compile Include="Mappers\SystemUserTO2UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sensors\SensorEvents\SensorEventMapper.cs" />
-    <Compile Include="Sensors\SensorEvents\SensorEventMapperFactory.cs" />
+    <Compile Include="Sensors\SensorEvents\EventMapper.cs" />
+    <Compile Include="Sensors\SensorEvents\EventMapperFactory.cs" />
     <Compile Include="Sensors\SensorEvents\SensorEventMappers\MoveSensorEventMapper.cs" />
     <Compile Include="Sensors\SensorEvents\SensorsRegister.cs" />
-    <Compile Include="Sensors\SensorEvents\SensorEvent.cs" />
+    <Compile Include="Sensors\SensorEvents\Event.cs" />
+    <Compile Include="Services\SMS\DefaultImpl\SMSMessageImpl.cs" />
+    <Compile Include="Services\SMS\DefaultImpl\SMSServiceImpl.cs" />
+    <Compile Include="Services\SMS\SMSMessage.cs" />
+    <Compile Include="Services\SMS\SMSRecipient.cs" />
+    <Compile Include="Services\SMS\SMSService.cs" />
+    <Compile Include="SystemContext\Default\DefaultDBSensorsLogger.cs" />
+    <Compile Include="SystemContext\Default\DefaultSensorsManager.cs" />
+    <Compile Include="SystemContext\Default\DefaultSystemContextConstructor.cs" />
     <Compile Include="SystemContext\SensorsLogger.cs" />
     <Compile Include="SystemContext\SensorsManager.cs" />
     <Compile Include="SystemContext\SensorsProvider.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="SystemContext\SystemContext.cs" />
-    <Compile Include="SystemContext\SystemContextTemplate.cs" />
+    <Compile Include="SystemContext\SystemContextConstructor.cs" />
     <Compile Include="TemplateEngine\MessageTemplate.cs" />
     <Compile Include="TemplateEngine\MessageTemplate2MessageTemplateTO.cs" />
     <Compile Include="TemplateEngine\MessageTemplateTO2MessageTemplateMapper.cs" />
@@ -79,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
-    <Folder Include="SystemContext\Default\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SystemModel\SystemModel.csproj">
