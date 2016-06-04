@@ -18,6 +18,11 @@ namespace ConsoleUI
             }
 
             WritePrivilege(PrivilegeDAO.GetInstance().GetById(2));
+
+            foreach(var mess in MessageTemplateDAO.GetInstance().GetAllMessagesTitles())
+            {
+                WriteMessageTemplate(mess);
+            }
         }
 
         private static void WritePrivilege(PrivilegeTO privilege)
@@ -26,6 +31,13 @@ namespace ConsoleUI
             Console.WriteLine("Name: {0}", privilege.PrivilegeName);
             Console.WriteLine("Description: {0}", privilege.PrivilegeDesc);
             Console.WriteLine("Level: {0}", privilege.PrivilegeLevel);
+        }
+
+        private static void WriteMessageTemplate(MessageTemplateTO messageTemplate)
+        {
+            Console.WriteLine("Id: {0}", messageTemplate.MessageId);
+            Console.WriteLine("MessageTitle: {0}", messageTemplate.MessageTitle ?? string.Empty);
+            Console.WriteLine("MessageTemplate: {0}", messageTemplate.MessageTemplate ?? string.Empty);
         }
     }
 }

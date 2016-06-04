@@ -49,6 +49,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Sensors\SensorEvents\SensorEventMappers\DefaultSensorEventMapper.cs" />
     <Compile Include="Sensors\SensorEvents\SpecificSensorEvents\MoveSensorEvent.cs" />
+    <Compile Include="Sensors\SensorInfo.cs" />
     <Compile Include="Sensors\SensorType.cs" />
     <Compile Include="Exceptions\AccessDeniedException.cs" />
     <Compile Include="Helpers\PrivilegeHelper.cs" />
@@ -60,15 +61,21 @@
     <Compile Include="Sensors\SensorEvents\SensorEventMappers\MoveSensorEventMapper.cs" />
     <Compile Include="Sensors\SensorEvents\SensorsRegister.cs" />
     <Compile Include="Sensors\SensorEvents\SensorEvent.cs" />
-    <Compile Include="Structs\User.cs" />
+    <Compile Include="SystemContext\SensorsManager.cs" />
+    <Compile Include="SystemContext\SensorsProvider.cs" />
+    <Compile Include="Users\User.cs" />
     <Compile Include="SystemContext\SystemContext.cs" />
     <Compile Include="SystemContext\SystemContextTemplate.cs" />
+    <Compile Include="TemplateEngine\MessageTemplate.cs" />
+    <Compile Include="TemplateEngine\MessageTemplate2MessageTemplateTO.cs" />
+    <Compile Include="TemplateEngine\MessageTemplateTO2MessageTemplateMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Structs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SystemModel\SystemModel.csproj">

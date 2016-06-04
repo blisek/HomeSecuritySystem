@@ -1,4 +1,4 @@
-﻿namespace SystemCore.Structs
+﻿namespace SystemCore.Users
 {
     public class User
     {
