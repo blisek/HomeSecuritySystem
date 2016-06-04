@@ -10,11 +10,41 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
 {
     public class MoveSensorEventMapper : SensorEventMapper
     {
-        public SensorEvent map(SensorEventTO eventTO)
+        public SensorEventTO Map(SensorEvent sensorEvent)
+        {
+            var castedSensorEvent = sensorEvent as MoveSensorEvent;
+
+            if (castedSensorEvent == null)
+                throw new ArgumentException("Invalid type of sensorEvent. Expected MoveSensorEvent, get - " + sensorEvent.GetType().Name);
+
+            return new SensorEventTO
+            {
+                EventId = castedSensorEvent.Id,
+                EventSource = castedSensorEvent.SensorId,
+                EventDescription = castedSensorEvent.EventDescription,
+                EventDate = castedSensorEvent.EventDate,
+                Severity = (int)castedSensorEvent.Severity,
+                SourceType = castedSensorEvent.SensorType.ToString(),
+                EventPar1 = castedSensorEvent.Distance.ToString(),
+                EventPar2 = castedSensorEvent.Angle.ToString()
+            };
+        }
+
+        public IEnumerable<SensorEventTO> Map(IEnumerable<SensorEvent> sensorEvents)
+        {
+            if (sensorEvents == null)
+                throw new ArgumentNullException("sensorEvents");
+
+            foreach (var sensorEvent in sensorEvents)
+                yield return Map(sensorEvent);
+        }
+
+        public SensorEvent Map(SensorEventTO eventTO)
         {
             float distance = .0f;
             float.TryParse(eventTO.EventPar1, out distance);
-            int angle = eventTO.EventPar3;
+            float angle = .0f;
+            float.TryParse(eventTO.EventPar2, out angle);
 
             return new MoveSensorEvent
             {
@@ -29,9 +59,13 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
             };
         }
 
-        public IEnumerable<SensorEvent> map(IEnumerable<SensorEventTO> eventTOs)
+        public IEnumerable<SensorEvent> Map(IEnumerable<SensorEventTO> eventTOs)
         {
-            return null;
+            if (eventTOs == null)
+                throw new ArgumentNullException("eventTOs");
+
+            foreach (var eventTO in eventTOs)
+                yield return Map(eventTO);
         }
     }
 }

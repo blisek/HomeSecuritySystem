@@ -26,7 +26,7 @@ namespace SystemCore.Sensors.SensorEvents
         /// <summary>
         /// Data i czas zajścia zdarzenia.
         /// </summary>
-        public DateTime EventDate { get; set; }
+        public DateTime? EventDate { get; set; }
 
         /// <summary>
         /// "Poważność" zdarzenia.

@@ -26,7 +26,24 @@ namespace SystemCore.Sensors.SensorEvents
         {
             SensorEventMapper sem = null;
             _mappers.TryGetValue(type, out sem);
-            return sem;
+            return sem ?? _mappers[SensorType.UNKNOWN];
+        }
+
+        /// <summary>
+        /// Do użycia przy typie czujnika zapisanym jako łańcuch znaków, zamiast Enum.
+        /// </summary>
+        /// <param name="sensorType"></param>
+        /// <returns>Odpowiedni mapper, bądź domyślny mapper jeśli nie znaleziono wyspecjalizowanej wersji.</returns>
+        public static SensorEventMapper GetMapper(string sensorType)
+        {
+            SensorType deductedType = SensorType.UNKNOWN;
+            try
+            {
+                deductedType = (SensorType)Enum.Parse(typeof(SensorType), sensorType, ignoreCase: true);
+            }
+            catch (ArgumentException) { }
+
+            return GetMapper(deductedType);
         }
 
         /// <summary>

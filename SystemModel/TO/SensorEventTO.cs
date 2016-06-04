@@ -14,7 +14,7 @@ namespace SystemModel.TO
         /// <summary>
         /// Unikalne id zdarzenia.
         /// </summary>
-        public int EventId { get; set; }
+        public int? EventId { get; set; }
 
         /// <summary>
         /// Źródło zdarzenia - unikalny identyfikator czujnika
@@ -34,7 +34,7 @@ namespace SystemModel.TO
         /// <summary>
         /// Data i czas zajścia zdarzenia.
         /// </summary>
-        public DateTime EventDate { get; set; }
+        public DateTime? EventDate { get; set; }
 
         /// <summary>
         /// "Poważność" zdarzenia.

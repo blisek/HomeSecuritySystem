@@ -9,13 +9,35 @@ namespace SystemCore.Sensors.SensorEvents.SensorEventMappers
 {
     public class DefaultSensorEventMapper : SensorEventMapper
     {
-        public IEnumerable<SensorEvent> map(IEnumerable<SensorEventTO> eventTOs)
+        public SensorEventTO Map(SensorEvent sensorEvent)
         {
-            foreach (var to in eventTOs)
-                yield return map(to);
+            return new SensorEventTO
+            {
+                EventId = sensorEvent.Id,
+                EventSource = sensorEvent.SensorId,
+                EventDescription = sensorEvent.EventDescription,
+                EventDate = sensorEvent.EventDate,
+                Severity = (int)sensorEvent.Severity,
+                SourceType = sensorEvent.SensorType.ToString()
+            };
         }
 
-        public SensorEvent map(SensorEventTO eventTO)
+        public IEnumerable<SensorEventTO> Map(IEnumerable<SensorEvent> sensorEvents)
+        {
+            if (sensorEvents == null)
+                throw new ArgumentNullException("sensorEvents");
+
+            foreach (var sensorEvent in sensorEvents)
+                yield return Map(sensorEvent);
+        }
+
+        public IEnumerable<SensorEvent> Map(IEnumerable<SensorEventTO> eventTOs)
+        {
+            foreach (var to in eventTOs)
+                yield return Map(to);
+        }
+
+        public SensorEvent Map(SensorEventTO eventTO)
         {
             return new SensorEvent
             {

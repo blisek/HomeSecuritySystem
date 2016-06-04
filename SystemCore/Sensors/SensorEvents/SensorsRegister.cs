@@ -11,7 +11,7 @@ namespace SystemCore.Sensors.SensorEvents
     {
         public static SensorType GetSensorType(string sensorId)
         {
-#error Skończyć
+#warning Skończyć
             return SensorType.UNKNOWN;
         }
     }

@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
-    <Folder Include="Structs\" />
+    <Folder Include="SystemContext\Default\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SystemModel\SystemModel.csproj">

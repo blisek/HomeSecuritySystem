@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemModel.TO;
 using SystemModel.DAO;
+using SystemCore.Sensors;
+using SystemCore.Sensors.SensorEvents;
+using SystemCore.Sensors.SensorEvents.SpecificSensorEvents;
 
 namespace ConsoleUI
 {
@@ -12,14 +15,41 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            foreach(var privilege in PrivilegeDAO.GetInstance().GetAll())
+            test2();
+        }
+
+        private static void test2()
+        {
+            SensorEvent se = new MoveSensorEvent
+            {
+                SensorId = "move_detector_#1",
+                SensorType = SensorType.MOVE_SENSOR,
+                Severity = EventSeverity.DEBUG,
+                Angle = 69.41f,
+                Distance = 11.5f
+            };
+
+            var to = SensorEventMapperFactory.GetMapper(SensorType.MOVE_SENSOR).Map(se);
+            to = SensorEventDAO.GetInstance().Insert(to);
+            int newId = to.EventId ?? 0;
+
+            var readBackSensorEvent = SensorEventDAO.GetInstance().GetById(newId);
+            SensorEvent newSE = SensorEventMapperFactory.GetMapper(readBackSensorEvent.SourceType).Map(readBackSensorEvent);
+
+            
+            return;
+        }
+
+        private static void test1()
+        {
+            foreach (var privilege in PrivilegeDAO.GetInstance().GetAll())
             {
                 WritePrivilege(privilege);
             }
 
             WritePrivilege(PrivilegeDAO.GetInstance().GetById(2));
 
-            foreach(var mess in MessageTemplateDAO.GetInstance().GetAllMessagesTitles())
+            foreach (var mess in MessageTemplateDAO.GetInstance().GetAllMessagesTitles())
             {
                 WriteMessageTemplate(mess);
             }
@@ -38,6 +68,15 @@ namespace ConsoleUI
             Console.WriteLine("Id: {0}", messageTemplate.MessageId);
             Console.WriteLine("MessageTitle: {0}", messageTemplate.MessageTitle ?? string.Empty);
             Console.WriteLine("MessageTemplate: {0}", messageTemplate.MessageTemplate ?? string.Empty);
+        }
+
+        private static void WriteSensorEventTO(SensorEventTO seTO)
+        {
+            Console.WriteLine("Id: {0}", seTO.EventId);
+            Console.WriteLine("Sensor id: {0}", seTO.EventSource);
+            Console.WriteLine("Source type: {0}", seTO.SourceType);
+            Console.WriteLine("Description: {0}", seTO.EventDescription);
+            Console.WriteLine("Event date: {0}", seTO.EventDate);
         }
     }
 }

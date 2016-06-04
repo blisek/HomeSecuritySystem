@@ -19,6 +19,5 @@ namespace SystemCore.Sensors
         /// </summary>
         public SensorDriver Driver { get; private set; }
 
-#error dokończyć
     }
 }

@@ -11,11 +11,12 @@ namespace SystemModel.DAO
     /// <summary>
     /// Dostarcza metody do wymiany informacji o zdarzeniach w systemie z bazą danych.
     /// </summary>
-    public class SensorEventDAO : AbstractDAO<SensorEventTO>
+    public sealed class SensorEventDAO : AbstractDAO<SensorEventTO>
     {
         private const string QUERY_INSERT_SENSOR_EVENT =
             "INSERT INTO sensor_events(EventSource, SourceType, EventDescription, EventDate, Severity, EventPar1, EventPar2, EventPar3, EventPar4) VALUES " +
             "(@EventSource, @SourceType, @EventDescription, @EventDate, @Severity, @EventPar1, @EventPar2, @EventPar3, @EventPar4); SELECT last_insert_rowid()";
+        private const string QUERY_SELECT_BY_ID = "select * from sensor_events where EventId = @eventId";
 
         private static volatile SensorEventDAO _instance;
         private static object _mutex = new object();
@@ -37,10 +38,13 @@ namespace SystemModel.DAO
 
         private SensorEventDAO() : base("sensor_events") { }
 
-        public SensorEventTO insert(SensorEventTO sensor)
+        public SensorEventTO Insert(SensorEventTO sensor)
         {
             if (sensor == null)
                 throw new ArgumentNullException("sensor");
+
+            if (sensor.EventDate == null)
+                sensor.EventDate = DateTime.Now;
 
             using(var connection = GetConnection())
             {
@@ -50,5 +54,17 @@ namespace SystemModel.DAO
             return sensor;
         }
 
+        /// <summary>
+        /// Zwraca konkretne zarejestrowane w systemie zdarzenie lub null jeśli nie istnieje zdarzenie o podanym id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SensorEventTO GetById(int id)
+        {
+            using(var connection = GetConnection())
+            {
+                return connection.Query<SensorEventTO>(QUERY_SELECT_BY_ID, new { eventId = id }).FirstOrDefault();
+            }
+        }
     }
 }
