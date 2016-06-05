@@ -21,7 +21,8 @@ namespace SystemCore.Mappers
                 throw new ArgumentNullException("sensorEvent");
 
             var mapper = EventMapperFactory.GetMapper(sensorEvent.EventType);
-            return mapper.Map(sensorEvent);
+            var mapped = mapper.Map(sensorEvent);
+            return mapped;
         }
 
         /// <summary>

@@ -29,8 +29,8 @@ namespace ConsoleUI.SensorDrivers.DriverRunner
                     };
                     moveSensorDriver.EventCallback(ev);
                     moveSensorDriver.ChangeState(SystemCore.Sensors.Drivers.SensorState.ON_HOLD);
-                    Thread.Sleep(1000);
-                    Console.WriteLine("MoveSensor");
+                    Thread.Sleep(6000);
+                    Console.WriteLine("MoveSensor activated");
                 }
             });
         }
@@ -51,8 +51,8 @@ namespace ConsoleUI.SensorDrivers.DriverRunner
                     };
                     driver.EventCallback(ev);
                     driver.ChangeState(SystemCore.Sensors.Drivers.SensorState.ON_HOLD);
-                    Thread.Sleep(1000);
-                    Console.WriteLine("SomeSensor");
+                    Thread.Sleep(6000);
+                    Console.WriteLine("SomeSensor activated");
                 }
             });
         }

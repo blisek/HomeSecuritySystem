@@ -18,6 +18,7 @@ namespace SystemCore.SystemActions.SensorEventsHandler.Impl
 
         public void HandleSensorEvent(SensorInfo sensorInfo, Event ev)
         {
+            ev.SensorId = sensorInfo.SensorId;
             SystemContext.SystemContext.SystemLogger.Log(ev);
 
             if(ev.EventType == EventType.MOVE_SENSOR)
