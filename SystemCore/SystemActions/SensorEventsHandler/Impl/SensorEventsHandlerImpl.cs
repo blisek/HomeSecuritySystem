@@ -18,7 +18,15 @@ namespace SystemCore.SystemActions.SensorEventsHandler.Impl
 
         public void HandleSensorEvent(SensorInfo sensorInfo, Event ev)
         {
-            throw new NotImplementedException();
+            SystemContext.SystemContext.SystemLogger.Log(ev);
+
+            if(ev.EventType == EventType.MOVE_SENSOR)
+            {
+                if(!SystemContext.SystemContext.ZoneManagement.IsSensorDisabled(sensorInfo))
+                {
+                    SystemContext.SystemContext.AlarmSystem.TurnOnAlarm(beepLengthInMs: 2, beepIntervalInMs: 1);
+                }
+            }
         }
 
         public void HandleStateChangedEvent(SensorInfo sensorInfo, SensorState newState)

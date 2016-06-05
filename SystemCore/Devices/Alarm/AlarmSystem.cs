@@ -8,10 +8,14 @@ namespace SystemCore.Devices.Alarm
 {
     public interface AlarmSystem
     {
-        void TurnOnAlarm(int beepLengthInMs, int beepIntervalsInMs);
-
-        bool IsAlarmOn();
+        void TurnOnAlarm(int beepLengthInMs, int beepIntervalInMs);
 
         void TurnOffAlarm();
+
+        bool AlarmOn { get; }
+
+        int BeepLengthInMiliseconds { get; }
+
+        int BeepIntervalInMiliseconds { get; }
     }
 }

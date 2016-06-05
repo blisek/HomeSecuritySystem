@@ -7,6 +7,7 @@ using SystemCore.Services.SMS;
 using SystemCore.SystemActions.UserManagement;
 using SystemCore.SystemActions.ZoneManagement;
 using SystemCore.SystemActions.SensorEventsHandler;
+using SystemCore.Devices.Alarm;
 
 namespace SystemCore.SystemContext
 {
@@ -59,6 +60,12 @@ namespace SystemCore.SystemContext
         /// </summary>
         /// <returns></returns>
         SensorEventsHandler GetSensorEventsHandler();
+
+        /// <summary>
+        /// Konstruuje i zwraca kontroler alarmu.
+        /// </summary>
+        /// <returns></returns>
+        AlarmSystem GetAlarmSystem();
 
         /// <summary>
         /// Metoda wywoływana jako ostatnia podczas konstruowania kontekstu.

@@ -12,6 +12,8 @@ using SystemCore.SystemActions.ZoneManagement;
 using SystemCore.SystemActions.ZoneManagement.Impl;
 using SystemCore.Users;
 using SystemCore.Exceptions;
+using SystemCore.Helpers;
+using SystemCore.Devices.Alarm;
 
 namespace SystemCore.SystemContext
 {
@@ -29,6 +31,8 @@ namespace SystemCore.SystemContext
             }
             private set
             {
+                if (_user != null && value != null)
+                    throw new AccessDeniedException("First current user must log out.");
                 _user = value;
             }
         }
@@ -44,6 +48,10 @@ namespace SystemCore.SystemContext
         public static UserManagement UserManagement { get; private set; }
 
         public static SensorEventsHandler SensorEventsHandler { get; private set; }
+
+        public static ZoneManagement ZoneManagement { get; private set; }
+
+        public static AlarmSystem AlarmSystem { get; private set; }
 
         public static void InitSystemContext(SystemContextConstructor systemContextTemplate)
         {
@@ -63,23 +71,37 @@ namespace SystemCore.SystemContext
 
             UserManagement = systemContextTemplate.GetUserManagement();
 
+            ZoneManagement = systemContextTemplate.GetZoneManagement();
+
+            AlarmSystem = systemContextTemplate.GetAlarmSystem();
+
             // czynności po inicjalizacji komponentów
             systemContextTemplate.AfterInit();
         }
 
         public static void LoginUser(User user, string password)
         {
-#error Zrobic
+            CurrentUser = user;
+            _LogAction(string.Format("User [{0}] has logged in.", user.Name));
         }
 
         public static void LogoutUser(User user)
         {
-
+            if (IsSomeoneLoggedIn() && CurrentUser != user)
+                throw new AccessDeniedException("Wrong user is trying to log out.");
+            CurrentUser = null;
+            _LogAction(string.Format("User [{0}] has logged out.", user.Name));
         }
 
         public static bool IsSomeoneLoggedIn()
         {
-            return CurrentUser != null;
+            return _user != null;
+        }
+
+        private static void _LogAction(string msg)
+        {
+            var ev = EventHelper.MakeMessage("SystemContext", msg);
+            SystemLogger.Log(ev);
         }
     }
 }

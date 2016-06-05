@@ -40,7 +40,7 @@ namespace SystemCore.Services.SMS.DefaultImpl
             var eventMsg = new Event
             {
                 EventDescription = string.Format(MSG_MESSAGE_SENT, msg.Message, phoneNumbers),
-                EventType = EventType.SENT_MESSGE,
+                EventType = EventType.MESSAGE,
                 Severity = EventSeverity.INFO,
                 SensorId = "SMSService"
             };

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemCore.Devices.Alarm;
 using SystemCore.Services.SMS;
 using SystemCore.Services.SMS.DefaultImpl;
 using SystemCore.SystemActions.SensorEventsHandler;
@@ -11,6 +12,7 @@ using SystemCore.SystemActions.UserManagement;
 using SystemCore.SystemActions.UserManagement.Impl;
 using SystemCore.SystemActions.ZoneManagement;
 using SystemCore.SystemActions.ZoneManagement.Impl;
+using SystemCore.Devices.Alarm.Impl;
 
 
 namespace SystemCore.SystemContext.Default
@@ -22,6 +24,11 @@ namespace SystemCore.SystemContext.Default
     {
         public abstract void AfterInit();
         public abstract void BeforeInit();
+
+        public AlarmSystem GetAlarmSystem()
+        {
+            return new AlarmSystemImpl();
+        }
 
         public SensorEventsHandler GetSensorEventsHandler()
         {

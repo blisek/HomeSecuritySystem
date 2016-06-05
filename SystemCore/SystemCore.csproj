@@ -47,9 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MinimumPrivilegeLevelAttribute.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Devices\Alarm\AlarmSystem.cs" />
+    <Compile Include="Devices\Alarm\Impl\AlarmSystemImpl.cs" />
     <Compile Include="Exceptions\SensorMissingException.cs" />
+    <Compile Include="Helpers\EventHelper.cs" />
     <Compile Include="Mappers\Event2EventTO.cs" />
     <Compile Include="Mappers\User2SystemUserTO.cs" />
     <Compile Include="Sensors\Drivers\SensorDriver.cs" />
@@ -98,10 +99,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="SystemActions\Impl\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SystemModel\SystemModel.csproj">
       <Project>{1b3b3e08-c279-4570-b835-273ec93a31ab}</Project>

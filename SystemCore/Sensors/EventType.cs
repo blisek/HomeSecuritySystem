@@ -2,6 +2,6 @@
 {
     public enum EventType
     {
-        UNKNOWN, MOVE_SENSOR, SENT_MESSGE // itd...
+        UNKNOWN, MOVE_SENSOR, MESSAGE // itd...
     }
 }
