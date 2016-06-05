@@ -36,7 +36,7 @@ namespace SystemCore.Mappers
         public static IEnumerable<SystemUserTO> Map(IEnumerable<User> users)
         {
             if (users == null)
-                throw new ArgumentNullException(users);
+                throw new ArgumentNullException("users");
 
             foreach (var user in users)
                 yield return Map(user);

@@ -9,7 +9,7 @@ using SystemModel.DAO;
 
 namespace SystemCore.SystemContext.Default
 {
-    public class DefaultDBSensorsLogger : SensorsLogger
+    public class DefaultDBLogger : SystemLogger
     {
         /// <summary>
         /// Logguje wszystkie zdarzenia zgłoszone przez czujniki w bazie danych.

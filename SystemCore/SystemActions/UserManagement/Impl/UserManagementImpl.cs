@@ -8,14 +8,16 @@ using SystemCore.Exceptions;
 using SystemCore.Mappers;
 using SystemModel.DAO;
 
-namespace SystemCore.SystemActions.Impl
+namespace SystemCore.SystemActions.UserManagement.Impl
 {
     public class UserManagementImpl : UserManagement
     {
         private const string MSG_PRIVILEGE_VIOLATED = "User [{0}] has no privilege. Required privilege level: {1}.";
 
-        public void DegradeUser(User performingUser, User userToDegrade, int newPrivilegeLevel)
+        public void DegradeUser(User userToDegrade, int newPrivilegeLevel)
         {
+            var performingUser = SystemContext.SystemContext.CurrentUser;
+
             if(performingUser.PrivilegeLevel >= newPrivilegeLevel)
             {
                 throw new AccessDeniedException(string.Format(MSG_PRIVILEGE_VIOLATED, performingUser.Name, newPrivilegeLevel - 1));
@@ -35,8 +37,10 @@ namespace SystemCore.SystemActions.Impl
             return SystemUserTO2UserMapper.Map(SystemUserDAO.GetInstance().GetAll());
         }
 
-        public void PromoteUser(User performingUser, User userToPromote, int newPrivilegeLevel)
+        public void PromoteUser(User userToPromote, int newPrivilegeLevel)
         {
+            User performingUser = SystemContext.SystemContext.CurrentUser;
+
             if (performingUser.PrivilegeLevel >= newPrivilegeLevel)
             {
                 throw new AccessDeniedException(string.Format(MSG_PRIVILEGE_VIOLATED, performingUser.Name, newPrivilegeLevel - 1));
@@ -51,8 +55,10 @@ namespace SystemCore.SystemActions.Impl
             SystemUserDAO.GetInstance().Update(User2SystemUserTO.Map(userToPromote));
         }
 
-        public void RegisterUser(User registratingUser, User registeredUser)
+        public void RegisterUser(User registeredUser)
         {
+            User registratingUser = SystemContext.SystemContext.CurrentUser;
+
             if (registratingUser.PrivilegeLevel >= registeredUser.PrivilegeLevel)
             {
                 throw new AccessDeniedException(string.Format(MSG_PRIVILEGE_VIOLATED, registratingUser.Name, registeredUser.PrivilegeLevel));
@@ -62,8 +68,10 @@ namespace SystemCore.SystemActions.Impl
             SystemUserDAO.GetInstance().Insert(registeredUserTO);
         }
 
-        public void RemoveUser(User performingUser, User userToRemove)
+        public void RemoveUser(User userToRemove)
         {
+            User performingUser = SystemContext.SystemContext.CurrentUser;
+
             if (performingUser.PrivilegeLevel >= userToRemove.PrivilegeLevel)
             {
                 throw new AccessDeniedException(string.Format(MSG_PRIVILEGE_VIOLATED, performingUser.Name, userToRemove.PrivilegeLevel));

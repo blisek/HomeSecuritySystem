@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemCore.Users;
 using SystemCore.Exceptions;
+using System.Reflection;
+using SystemCore.Attributes;
 
 namespace SystemCore.Helpers
 {
@@ -38,6 +40,38 @@ namespace SystemCore.Helpers
         {
             if (!HasAccess(user, privilegeLevel))
                 throw new AccessDeniedException(string.Format(ACCESS_DENIED_MESSAGE, user.Id, user.Name, privilegeLevel, user.PrivilegeLevel));
+        }
+
+        public static void CheckUserPrivilegeForMethod(MethodInfo methodInfo)
+        {
+            var user = SystemContext.SystemContext.CurrentUser;
+            if (user == null)
+                throw new AccessDeniedException("No user is logged in.");
+
+            CheckUserPrivilegeForMethod(user, methodInfo);
+        }
+
+        public static void CheckUserPrivilegeForMethod(User user, MethodInfo method)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            if (method == null)
+                throw new ArgumentNullException("method");
+
+            var attr = method.GetCustomAttribute(typeof(MinimumPrivilegeLevelAttribute), false) as MinimumPrivilegeLevelAttribute;
+            if (attr == null)
+                return;
+            AssertAccess(user, attr.PrivilegeLevel);
+        }
+
+        public static class DefaultPrivileges
+        {
+            public const int Admin = 1;
+
+            public const int User = 20;
+
+            public const int Guest = 30;
         }
     }
 }

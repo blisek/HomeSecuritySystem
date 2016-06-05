@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemCore.Services.SMS;
-using SystemCore.SystemActions;
+using SystemCore.SystemActions.UserManagement;
+using SystemCore.SystemActions.ZoneManagement;
+using SystemCore.SystemActions.SensorEventsHandler;
 
 namespace SystemCore.SystemContext
 {
@@ -20,7 +22,7 @@ namespace SystemCore.SystemContext
         /// Konstruuje i zwraca loggera.
         /// </summary>
         /// <returns></returns>
-        SensorsLogger GetSensorsLogger();
+        SystemLogger GetSensorsLogger();
 
         /// <summary>
         /// Konstruuje i zwraca managera sensorów.
@@ -45,6 +47,18 @@ namespace SystemCore.SystemContext
         /// </summary>
         /// <returns></returns>
         UserManagement GetUserManagement();
+
+        /// <summary>
+        /// Konstruuje i zwraca menadżera stref czujników.
+        /// </summary>
+        /// <returns></returns>
+        ZoneManagement GetZoneManagement();
+
+        /// <summary>
+        /// Konstruuje i zwraca menadżera zdarzeń.
+        /// </summary>
+        /// <returns></returns>
+        SensorEventsHandler GetSensorEventsHandler();
 
         /// <summary>
         /// Metoda wywoływana jako ostatnia podczas konstruowania kontekstu.

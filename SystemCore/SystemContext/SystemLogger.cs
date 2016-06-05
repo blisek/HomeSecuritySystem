@@ -5,7 +5,7 @@ namespace SystemCore.SystemContext
     /// <summary>
     /// Loguje zdarzenia w systemie.
     /// </summary>
-    public interface SensorsLogger
+    public interface SystemLogger
     {
         void Log(Event sensorEvent);
     }

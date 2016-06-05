@@ -26,8 +26,8 @@ namespace SystemCore.SystemContext.Default
                 throw new ArgumentNullException("sensor");
 
             var sensorDriver = sensor.Driver;
-            Action<Event> driverEventCallback = delegate (Event se) { OnEventOccured(sensor.SensorId, se); };
-            Action<SensorState> driverStateCallback = delegate (SensorState ss) { OnStateChanged(sensor.SensorId, ss); };
+            Action<Event> driverEventCallback = delegate (Event se) { SystemContext.SensorEventsHandler.HandleSensorEvent(sensor, se); };
+            Action<SensorState> driverStateCallback = delegate (SensorState ss) { SystemContext.SensorEventsHandler.HandleStateChangedEvent(sensor, ss); };
             sensorDriver.EventCallback = driverEventCallback;
             sensorDriver.StateChangedCallback = driverStateCallback;
             _sensors[sensor.SensorId] = sensor;
@@ -49,19 +49,21 @@ namespace SystemCore.SystemContext.Default
             return _sensors.Values.Where(s => s.SensorId == sensorId).FirstOrDefault();
         }
 
+        [Obsolete]
         private void OnEventOccured(string sensorId, Event sensorEvent)
         {
             if (sensorEvent.SensorId == null)
                 sensorEvent.SensorId = sensorId;
-            SystemContext.SensorsLogger.Log(sensorEvent);
+            SystemContext.SystemLogger.Log(sensorEvent);
         }
 
+        [Obsolete]
         private void OnStateChanged(string sensorId, SensorState sensorState)
         {
             var sensorEvent = new Event { SensorId = sensorId, Severity = EventSeverity.INFO };
             sensorEvent.EventDescription = string.Format(MSG_STATE_CHANGES, sensorId, sensorState);
             sensorEvent.EventType = EventType.UNKNOWN;
-            SystemContext.SensorsLogger.Log(sensorEvent);
+            SystemContext.SystemLogger.Log(sensorEvent);
         }
     }
 }

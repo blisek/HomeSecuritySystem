@@ -15,6 +15,11 @@ namespace SystemCore.Sensors
         public string SensorId { get; set; }
 
         /// <summary>
+        /// Określa do jakiej strefy należy czujnik.
+        /// </summary>
+        public uint Zone { get; set; }
+
+        /// <summary>
         /// Sterownik urządzenia.
         /// </summary>
         public SensorDriver Driver { get; private set; }

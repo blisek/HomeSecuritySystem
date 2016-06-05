@@ -45,7 +45,7 @@ namespace SystemCore.Services.SMS.DefaultImpl
                 SensorId = "SMSService"
             };
 
-            SystemContext.SystemContext.SensorsLogger.Log(eventMsg);
+            SystemContext.SystemContext.SystemLogger.Log(eventMsg);
         }
     }
 }

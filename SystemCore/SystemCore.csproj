@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\MinimumPrivilegeLevelAttribute.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Devices\Alarm\AlarmSystem.cs" />
+    <Compile Include="Exceptions\SensorMissingException.cs" />
     <Compile Include="Mappers\Event2EventTO.cs" />
     <Compile Include="Mappers\User2SystemUserTO.cs" />
     <Compile Include="Sensors\Drivers\SensorDriver.cs" />
@@ -71,12 +74,18 @@
     <Compile Include="Services\SMS\SMSMessage.cs" />
     <Compile Include="Services\SMS\SMSRecipient.cs" />
     <Compile Include="Services\SMS\SMSService.cs" />
-    <Compile Include="SystemActions\Impl\UserManagementImpl.cs" />
-    <Compile Include="SystemActions\UserManagement.cs" />
+    <Compile Include="SystemActions\SensorEventsHandler\Impl\SensorEventsHandlerImpl.cs" />
+    <Compile Include="SystemActions\UserManagement\Impl\UserManagementImpl.cs" />
+    <Compile Include="SystemActions\UserManagement\Impl\UserManagementPrivilegeDecorator.cs" />
+    <Compile Include="SystemActions\ZoneManagement\Impl\ZoneManagementImpl.cs" />
+    <Compile Include="SystemActions\SensorEventsHandler\SensorEventsHandler.cs" />
+    <Compile Include="SystemActions\UserManagement\UserManagement.cs" />
+    <Compile Include="SystemActions\ZoneManagement\Impl\ZoneManagementPrivilegeDecorator.cs" />
+    <Compile Include="SystemActions\ZoneManagement\ZoneManagement.cs" />
     <Compile Include="SystemContext\Default\DefaultDBSensorsLogger.cs" />
     <Compile Include="SystemContext\Default\DefaultSensorsManager.cs" />
     <Compile Include="SystemContext\Default\DefaultSystemContextConstructor.cs" />
-    <Compile Include="SystemContext\SensorsLogger.cs" />
+    <Compile Include="SystemContext\SystemLogger.cs" />
     <Compile Include="SystemContext\SensorsManager.cs" />
     <Compile Include="SystemContext\SensorsProvider.cs" />
     <Compile Include="Users\User.cs" />
@@ -91,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="SystemActions\Impl\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SystemModel\SystemModel.csproj">

@@ -5,8 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemCore.Services.SMS;
 using SystemCore.Services.SMS.DefaultImpl;
-using SystemCore.SystemActions;
-using SystemCore.SystemActions.Impl;
+using SystemCore.SystemActions.SensorEventsHandler;
+using SystemCore.SystemActions.SensorEventsHandler.Impl;
+using SystemCore.SystemActions.UserManagement;
+using SystemCore.SystemActions.UserManagement.Impl;
+using SystemCore.SystemActions.ZoneManagement;
+using SystemCore.SystemActions.ZoneManagement.Impl;
+
 
 namespace SystemCore.SystemContext.Default
 {
@@ -18,9 +23,14 @@ namespace SystemCore.SystemContext.Default
         public abstract void AfterInit();
         public abstract void BeforeInit();
 
-        public SensorsLogger GetSensorsLogger()
+        public SensorEventsHandler GetSensorEventsHandler()
         {
-            return new DefaultDBSensorsLogger();
+            return new SensorEventsHandlerImpl();
+        }
+
+        public SystemLogger GetSensorsLogger()
+        {
+            return new DefaultDBLogger();
         }
 
         public SensorsManager GetSensorsManager()
@@ -37,7 +47,12 @@ namespace SystemCore.SystemContext.Default
 
         public UserManagement GetUserManagement()
         {
-            return new UserManagementImpl();
+            return new UserManagementPrivilegeDecorator(new UserManagementImpl());
+        }
+
+        public ZoneManagement GetZoneManagement()
+        {
+            return new ZoneManagementPrivilegeDecorator(new ZoneManagementImpl());
         }
     }
 }
