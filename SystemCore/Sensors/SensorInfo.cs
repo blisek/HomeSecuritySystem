@@ -22,7 +22,7 @@ namespace SystemCore.Sensors
         /// <summary>
         /// Sterownik urządzenia.
         /// </summary>
-        public SensorDriver Driver { get; private set; }
+        public SensorDriver Driver { get; set; }
 
     }
 }

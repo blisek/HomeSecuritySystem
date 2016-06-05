@@ -8,6 +8,11 @@ using SystemModel.DAO;
 using SystemCore.Sensors;
 using SystemCore.Sensors.SensorEvents;
 using SystemCore.Sensors.SensorEvents.SpecificSensorEvents;
+using SystemCore.SystemContext;
+using ConsoleUI.SystemImpl;
+using ConsoleUI.PageLayout;
+using ConsoleUI.Pages;
+using ConsoleUI.Pages.Impl;
 
 namespace ConsoleUI
 {
@@ -15,7 +20,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            test2();
+            SystemContext.InitSystemContext(new MySystemContextConstructor());
+
+            var pageLayoutManager = new PageLayoutManager();
+            pageLayoutManager.StartPage = new MainPage();
+
+            pageLayoutManager.Show();
         }
 
         private static void test2()

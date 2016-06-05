@@ -1,4 +1,5 @@
-﻿using SystemCore.Sensors.SensorEvents;
+﻿using System.Collections.Generic;
+using SystemCore.Sensors.SensorEvents;
 
 namespace SystemCore.SystemContext
 {
@@ -8,5 +9,7 @@ namespace SystemCore.SystemContext
     public interface SystemLogger
     {
         void Log(Event sensorEvent);
+
+        IEnumerable<Event> GetAllEvents();
     }
 }

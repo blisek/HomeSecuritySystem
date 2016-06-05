@@ -44,6 +44,9 @@ namespace SystemCore.Helpers
 
         public static void CheckUserPrivilegeForMethod(MethodInfo methodInfo)
         {
+            if (methodInfo.GetCustomAttribute(typeof(MinimumPrivilegeLevelAttribute), false) == null)
+                return;
+
             var user = SystemContext.SystemContext.CurrentUser;
             if (user == null)
                 throw new AccessDeniedException("No user is logged in.");

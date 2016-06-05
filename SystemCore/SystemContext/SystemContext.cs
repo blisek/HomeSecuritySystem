@@ -71,12 +71,21 @@ namespace SystemCore.SystemContext
 
             UserManagement = systemContextTemplate.GetUserManagement();
 
+            SensorEventsHandler = systemContextTemplate.GetSensorEventsHandler();
+
             ZoneManagement = systemContextTemplate.GetZoneManagement();
 
             AlarmSystem = systemContextTemplate.GetAlarmSystem();
 
             // czynności po inicjalizacji komponentów
             systemContextTemplate.AfterInit();
+
+            if (SensorsProvider == null || SensorsManager == null || 
+                SystemLogger == null || SMSService == null || UserManagement == null || 
+                SensorEventsHandler == null || ZoneManagement == null || AlarmSystem == null)
+            {
+                throw new InvalidOperationException("One of services isn't instantiated.");
+            }
         }
 
         public static void LoginUser(User user, string password)

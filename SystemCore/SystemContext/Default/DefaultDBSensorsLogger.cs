@@ -11,6 +11,11 @@ namespace SystemCore.SystemContext.Default
 {
     public class DefaultDBLogger : SystemLogger
     {
+        public IEnumerable<Event> GetAllEvents()
+        {
+            return EventDAO.GetInstance().GetAll().Select(EventTO2Event.Map);
+        }
+
         /// <summary>
         /// Logguje wszystkie zdarzenia zgłoszone przez czujniki w bazie danych.
         /// </summary>
